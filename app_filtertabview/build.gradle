@@ -1,0 +1,23 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+apply from: "${rootDir}/configs/tools/gradle/app.gradle"
+
+android {
+
+    defaultConfig {
+        applicationId "com.kennie.library.app.filtertabview"
+    }
+}
+
+dependencies {
+
+    implementation depK.core
+    implementation depX.appcompat
+    implementation depX.material
+    implementation project(':library_filtermenu')
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+}
