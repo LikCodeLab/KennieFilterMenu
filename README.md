@@ -1,9 +1,9 @@
-# KennieLibTemplate
+# KennieFilterMenu
 
 <p align="center"><img src="./resources/screenshots/logo.png" width="10%"/></p>
 
 <p align="center">
-    <strong>Android Library 模板库</strong>
+    <strong>下拉筛选菜单</strong>
     <br>
     <a href="https://kennielab.github.io/KennieLibTemplate/">使用文档</a>
     <br>
@@ -19,7 +19,7 @@
 
 ## 简介
 
-Android Library 模板库
+下拉筛选菜单
 
 如有任何疑问或者Bug，请在 github 上公开讨论[技术问题](https://github.com/kennielab/KennieLetterIndexBar/issues)
 
@@ -48,7 +48,7 @@ Android Library 模板库
 
 
 ## 开始使用
-因为依赖的关系，KennieLibTemplate 目前仅支持 AndroidX 作为基础进行开发，若您正在使用最新版本的 Android Studio，那么默认创建的项目就是使用 AndroidX 作为底层框架的。
+因为依赖的关系，KennieFilterMenu 目前仅支持 AndroidX 作为基础进行开发，若您正在使用最新版本的 Android Studio，那么默认创建的项目就是使用 AndroidX 作为底层框架的。
 > **使用前请查看注意事项**，当前版本仅支持AndroidX
 
 ### 📥引入
@@ -77,12 +77,12 @@ allprojects {
 
 ```
 def lib = "0.0.2"
-implementation "com.github.kennielab:KennieLibTemplate:${lib}"
+implementation "com.github.kennielab:KennieFilterMenu:${lib}"
 ```
 
 ### Wiki使用
 
-具体的使用说明，请参阅 [DOC](https://kennielab.github.io/KennieLibTemplate/)
+具体的使用说明，请参阅 [DOC](https://kennielab.github.io/KennieFilterMenu/)
 
 ## 更新日志
 - [详细日志](./UPDATELOG.md)

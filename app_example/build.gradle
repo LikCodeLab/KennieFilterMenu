@@ -8,7 +8,7 @@ apply from: "${rootDir}/configs/tools/gradle/app.gradle"
 android {
 
     defaultConfig {
-        applicationId "com.kennie.example.library"
+        applicationId "com.kennie.library.example.filtermenu"
     }
 
 }

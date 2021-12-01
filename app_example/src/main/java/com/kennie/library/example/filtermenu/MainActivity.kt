@@ -1,4 +1,4 @@
-package com.kennie.example.library
+package com.kennie.library.example.filtermenu
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -7,8 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.kennie.library.example.R
-import com.kennie.library.example.databinding.ActivityMainBinding
+
+import com.kennie.library.example.filtermenu.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
