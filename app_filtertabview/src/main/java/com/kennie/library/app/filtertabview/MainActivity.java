@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements OnSelectResultLis
         StatusBarHelper.translucent(this);
         setContentView(R.layout.activity_main);
 
-        String jsonStr = getJson(this,"demo_data.json");
+        String jsonStr = getJson(this, "demo_data.json");
         FilterEntity filterEntity = JsonToObject(jsonStr, FilterEntity.class);
 
         FilterTabView ftb_filter = findViewById(R.id.ftb_filter);
@@ -37,10 +37,10 @@ public class MainActivity extends AppCompatActivity implements OnSelectResultLis
         ftb_filter.removeViews();
         FilterTabInfo bean1 = new FilterTabInfo("区域", FilterTabType.FILTER_TYPE_AREA, filterEntity.getArea());
         FilterTabInfo bean2 = new FilterTabInfo("总价", FilterTabType.FILTER_TYPE_PRICE, filterEntity.getPrice());
-        FilterTabInfo bean3 = new FilterTabInfo("户型", FilterTabType.FILTER_TYPE_SINGLE_SELECT, filterEntity.getHouseType());
-        FilterTabInfo bean4 = new FilterTabInfo("筛选", FilterTabType.FILTER_TYPE_MUL_SELECT, filterEntity.getMulSelect());
-        FilterTabInfo bean5 = new FilterTabInfo("几室", FilterTabType.FILTER_TYPE_SINGLE_GIRD, filterEntity.getHouseType());
-        FilterTabInfo bean6 = new FilterTabInfo("几室", FilterTabType.FILTER_TYPE_SINGLE_GIRD, filterEntity.getPrice());
+        FilterTabInfo bean3 = new FilterTabInfo("户型", FilterTabType.TYPE_SINGLE, filterEntity.getHouseType());
+        FilterTabInfo bean4 = new FilterTabInfo("筛选", FilterTabType.TYPE_MUL, filterEntity.getMulSelect());
+        FilterTabInfo bean5 = new FilterTabInfo("几室", FilterTabType.TYPE_SINGLE_GIRD, filterEntity.getHouseType());
+        FilterTabInfo bean6 = new FilterTabInfo("几室", FilterTabType.TYPE_SINGLE_GIRD, filterEntity.getPrice());
 
 
         ftb_filter.addFilterItem(bean1.getTabName(), bean1.getFilterData(), bean1.getPopupType(), 0);
@@ -51,12 +51,11 @@ public class MainActivity extends AppCompatActivity implements OnSelectResultLis
         ftb_filter.addFilterItem(bean6.getTabName(), bean6.getFilterData(), bean6.getPopupType(), 5);
 
 
-
         final TextView toolbar = findViewById(R.id.toolbar);
         toolbar.post(new Runnable() {
             @Override
             public void run() {
-                Log.e("LUYS",toolbar.getHeight() + ":::::" );
+                Log.e("LUYS", toolbar.getHeight() + ":::::");
             }
         });
         ftb_filter.setOnSelectResultListener(this);
@@ -109,8 +108,8 @@ public class MainActivity extends AppCompatActivity implements OnSelectResultLis
     @Override
     public void onSelectResult(FilterResultBean resultBean) {
 
-        String message="";
-        if(resultBean.getPopupType() == 3) {
+        String message = "";
+        if (resultBean.getPopupType() == FilterTabType.TYPE_MUL) {
             List<FilterResultBean.MulTypeBean> list = resultBean.getSelectList();
             for (int i = 0; i < list.size(); i++) {
                 FilterResultBean.MulTypeBean bean = list.get(i);
@@ -121,15 +120,15 @@ public class MainActivity extends AppCompatActivity implements OnSelectResultLis
                 }
             }
         } else {
-            message =resultBean.getItemId()+":"+resultBean.getName();
+            message = resultBean.getItemId() + ":" + resultBean.getName();
         }
 
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onSelectResultList(List<FilterResultBean> resultBeans) {
-        String message="";
+        String message = "";
         List<FilterResultBean> list = resultBeans;
         for (int i = 0; i < list.size(); i++) {
             FilterResultBean bean = list.get(i);
@@ -139,6 +138,6 @@ public class MainActivity extends AppCompatActivity implements OnSelectResultLis
                 message = message + bean.getName() + ",";
             }
         }
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

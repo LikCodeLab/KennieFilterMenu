@@ -26,20 +26,20 @@ public class PopupEntityLoaderImp implements IPopupLoader<BaseFilterTab> {
         PopupWindow popupWindow = null;
 
         switch (filterType) {
+            case FilterTabType.TYPE_SINGLE:
+                popupWindow = new SingleSelectPopupWindow(context, data, filterType, position, onFilterToViewListener);
+                break;
+            case FilterTabType.TYPE_MUL:
+                popupWindow = new MulSelectPopupwindow(context, data, filterType, position, onFilterToViewListener);
+                break;
+            case FilterTabType.TYPE_SINGLE_GIRD:
+                popupWindow = new GridSelectPopupWindow(context, data, filterType, position, onFilterToViewListener);
+                break;
             case FilterTabType.FILTER_TYPE_AREA:
                 popupWindow = new AreaSelectPopupWindow(context, data, filterType, position, onFilterToViewListener, view);
                 break;
             case FilterTabType.FILTER_TYPE_PRICE:
                 popupWindow = new PriceSelectPopupWindow(context, data, filterType, position, onFilterToViewListener);
-                break;
-            case FilterTabType.FILTER_TYPE_SINGLE_SELECT:
-                popupWindow = new SingleSelectPopupWindow(context, data, filterType, position, onFilterToViewListener);
-                break;
-            case FilterTabType.FILTER_TYPE_MUL_SELECT:
-                popupWindow = new MulSelectPopupwindow(context, data, filterType, position, onFilterToViewListener);
-                break;
-            case FilterTabType.FILTER_TYPE_SINGLE_GIRD:
-                popupWindow = new GridSelectPopupWindow(context, data, filterType, position, onFilterToViewListener);
                 break;
             default:
                 break;
