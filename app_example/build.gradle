@@ -1,0 +1,24 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+apply from: "${rootDir}/configs/tools/gradle/app.gradle"
+
+android {
+
+    defaultConfig {
+        applicationId "com.kennie.example.library"
+    }
+
+}
+
+dependencies {
+    implementation depK.core
+    implementation depX.appcompat
+    implementation depX.material
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+}
