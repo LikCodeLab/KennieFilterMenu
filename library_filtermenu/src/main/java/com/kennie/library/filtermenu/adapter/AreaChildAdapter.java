@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.kennie.library.filtermenu.R;
-import com.kennie.library.filtermenu.entity.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterTab;
 import com.kennie.library.filtermenu.util.SpUtils;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import java.util.List;
 public class AreaChildAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
-    private List<BaseFilterBean> mList;
+    private List<BaseFilterTab> mList;
     private OnItemClickListener onItemClickListener;
 
     public AreaChildAdapter(Context context) {
@@ -44,25 +44,25 @@ public class AreaChildAdapter extends RecyclerView.Adapter {
 
         try {
             ViewHolder viewHolder = (ViewHolder)holder;
-            BaseFilterBean bean = mList.get(position);
+            BaseFilterTab bean = mList.get(position);
             viewHolder.tv_content.setText(bean.getItemName());
 
             // 是否设置“不限”为选中
             boolean isSelectFirst = true;
             for (int i = 0; i < mList.size(); i++) {
-                BaseFilterBean entity = mList.get(i);
-                if (entity.getSelecteStatus() == 1) {
+                BaseFilterTab entity = mList.get(i);
+                if (entity.getSelectStatus() == 1) {
                     isSelectFirst = false;
                     break;
                 }
             }
 
             if (isSelectFirst) {
-                mList.get(0).setSelecteStatus(1);
+                mList.get(0).setSelectStatus(1);
             }
 
             TextPaint textPaint = viewHolder.tv_content.getPaint();
-            if (bean.getSelecteStatus() == 0) {
+            if (bean.getSelectStatus() == 0) {
                 textPaint.setFakeBoldText(false);
                 viewHolder.tv_content.setTextColor(SpUtils.getInstance(mContext).getTextUnSelect());
             } else {
@@ -77,9 +77,9 @@ public class AreaChildAdapter extends RecyclerView.Adapter {
                 public void onClick(View view) {
                     for (int i = 0; i < mList.size(); i++) {
                         if (i == position) {
-                            mList.get(position).setSelecteStatus(1);
+                            mList.get(position).setSelectStatus(1);
                         } else {
-                            mList.get(i).setSelecteStatus(0);
+                            mList.get(i).setSelectStatus(0);
                         }
                     }
                     notifyDataSetChanged();
@@ -91,7 +91,7 @@ public class AreaChildAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public void addData(List<BaseFilterBean> list) {
+    public void addData(List<BaseFilterTab> list) {
         mList.clear();
         mList.addAll(list);
         notifyDataSetChanged();

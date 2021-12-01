@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 
-
-
 import java.util.List;
 
 import static android.view.View.MeasureSpec.AT_MOST;
@@ -19,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kennie.library.filtermenu.entity.FilterResultBean;
 import com.kennie.library.filtermenu.R;
 import com.kennie.library.filtermenu.adapter.PopupSingleAdapter;
-import com.kennie.library.filtermenu.entity.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterTab;
 import com.kennie.library.filtermenu.core.BasePopupWindow;
 import com.kennie.library.filtermenu.listener.OnFilterToViewListener;
 import com.kennie.library.filtermenu.util.Utils;
@@ -32,17 +30,17 @@ public class SingleSelectPopupWindow extends BasePopupWindow {
     private RecyclerView rv_content;
     private PopupSingleAdapter mAdapter;
 
-    public SingleSelectPopupWindow(Context context, List<BaseFilterBean> data, int filterType, int position, OnFilterToViewListener onFilterToViewListener) {
-        super(context, data, filterType,position,onFilterToViewListener);
+    public SingleSelectPopupWindow(Context context, List<BaseFilterTab> data, int filterType, int position, OnFilterToViewListener onFilterToViewListener) {
+        super(context, data, filterType, position, onFilterToViewListener);
     }
 
     @Override
     public View initView() {
-        View rootView = LayoutInflater.from(getContext()).inflate(R.layout.popup_single_select, null,false);
+        View rootView = LayoutInflater.from(getContext()).inflate(R.layout.popup_single_select, null, false);
         rv_content = rootView.findViewById(R.id.rv_content);
         mAdapter = new PopupSingleAdapter(getContext(), getData());
         final int maxHeight = Utils.dp2px(getContext(), 273);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext()){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext()) {
             @Override
             public void setMeasuredDimension(Rect childrenBounds, int wSpec, int hSpec) {
                 super.setMeasuredDimension(childrenBounds, wSpec, View.MeasureSpec.makeMeasureSpec(maxHeight, AT_MOST));
@@ -65,19 +63,16 @@ public class SingleSelectPopupWindow extends BasePopupWindow {
 
     @Override
     public void initSelectData() {
-        mAdapter.setOnItemClickListener(new PopupSingleAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                int itemId = getData().get(position).getId();
-                String itemName = getData().get(position).getItemName();
-                FilterResultBean resultBean = new FilterResultBean();
-                resultBean.setPopupIndex(getPosition());
-                resultBean.setPopupType(getFilterType());
-                resultBean.setItemId(itemId);
-                resultBean.setName(itemName);
-                getOnFilterToViewListener().onFilterToView(resultBean);
-                dismiss();
-            }
+        mAdapter.setOnItemClickListener(position -> {
+            int itemId = getData().get(position).getItemId();
+            String itemName = getData().get(position).getItemName();
+            FilterResultBean resultBean = new FilterResultBean();
+            resultBean.setPopupIndex(getPosition());
+            resultBean.setPopupType(getFilterType());
+            resultBean.setItemId(itemId);
+            resultBean.setName(itemName);
+            getOnFilterToViewListener().onFilterToView(resultBean);
+            dismiss();
         });
     }
 

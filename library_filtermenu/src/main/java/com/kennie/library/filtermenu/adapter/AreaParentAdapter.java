@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.kennie.library.filtermenu.R;
-import com.kennie.library.filtermenu.entity.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterTab;
 import com.kennie.library.filtermenu.util.SpUtils;
 
 import java.util.List;
@@ -26,13 +26,13 @@ public class AreaParentAdapter extends RecyclerView.Adapter{
 
     private Context mContext;
     private OnItemClickListener onItemClickListener;
-    private List<BaseFilterBean> mList;
+    private List<BaseFilterTab> mList;
     private Handler mHandler;
     /**
      * 当前选中的item position
      */
 
-    public AreaParentAdapter(Context context, List<BaseFilterBean> list, Handler handler) {
+    public AreaParentAdapter(Context context, List<BaseFilterTab> list, Handler handler) {
         mContext = context;
         mList = list;
         mHandler = handler;
@@ -52,25 +52,25 @@ public class AreaParentAdapter extends RecyclerView.Adapter{
             ViewHolder viewHolder = (ViewHolder) holder;
 
             if (mList != null) {
-                BaseFilterBean bean = mList.get(position);
+                BaseFilterTab bean = mList.get(position);
                 viewHolder.tv_content.setText(bean.getItemName());
 
                 // 是否设置“不限”为选中
                 boolean isSelectFirst = true;
                 for (int i = 0; i < mList.size(); i++) {
-                    BaseFilterBean entity = mList.get(i);
-                    if (entity.getSelecteStatus() == 1) {
+                    BaseFilterTab entity = mList.get(i);
+                    if (entity.getSelectStatus() == 1) {
                         isSelectFirst = false;
                         break;
                     }
                 }
 
                 if (isSelectFirst) {
-                    mList.get(0).setSelecteStatus(1);
+                    mList.get(0).setSelectStatus(1);
                 }
 
                 TextPaint textPaint = viewHolder.tv_content.getPaint();
-                if (bean.getSelecteStatus() == 0) {
+                if (bean.getSelectStatus() == 0) {
                     textPaint.setFakeBoldText(false);
                     viewHolder.tv_content.setTextColor(SpUtils.getInstance(mContext).getTextUnSelect());
                     viewHolder.tv_content.setBackgroundColor(mContext.getResources().getColor(R.color.color_f5f5f5));
@@ -89,12 +89,12 @@ public class AreaParentAdapter extends RecyclerView.Adapter{
                 viewHolder.tv_content.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        BaseFilterBean baseFilterBean = mList.get(position);
+                        BaseFilterTab baseFilterBean = mList.get(position);
                         for (int i = 0; i < mList.size(); i++) {
                             if (i == position) {
-                                mList.get(position).setSelecteStatus(1);
+                                mList.get(position).setSelectStatus(1);
                             } else {
-                                mList.get(i).setSelecteStatus(0);
+                                mList.get(i).setSelectStatus(0);
                             }
                         }
                         notifyDataSetChanged();

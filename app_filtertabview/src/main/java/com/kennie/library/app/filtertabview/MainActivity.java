@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
-import com.kennie.library.filtermenu.entity.FilterInfoBean;
+import com.kennie.library.filtermenu.entity.FilterTabInfo;
 import com.kennie.library.filtermenu.entity.FilterResultBean;
 import com.kennie.library.filtermenu.config.FilterTabType;
 import com.kennie.library.filtermenu.FilterTabView;
@@ -35,12 +35,12 @@ public class MainActivity extends AppCompatActivity implements OnSelectResultLis
         FilterTabView ftb_filter = findViewById(R.id.ftb_filter);
         ftb_filter.setColorMain(getResources().getColor(R.color.color_FF6F00));
         ftb_filter.removeViews();
-        FilterInfoBean bean1 = new FilterInfoBean("区域", FilterTabType.FILTER_TYPE_AREA, filterEntity.getArea());
-        FilterInfoBean bean2 = new FilterInfoBean("总价", FilterTabType.FILTER_TYPE_PRICE, filterEntity.getPrice());
-        FilterInfoBean bean3 = new FilterInfoBean("户型", FilterTabType.FILTER_TYPE_SINGLE_SELECT, filterEntity.getHouseType());
-        FilterInfoBean bean4 = new FilterInfoBean("筛选", FilterTabType.FILTER_TYPE_MUL_SELECT, filterEntity.getMulSelect());
-        FilterInfoBean bean5 = new FilterInfoBean("几室", FilterTabType.FILTER_TYPE_SINGLE_GIRD, filterEntity.getHouseType());
-        FilterInfoBean bean6 = new FilterInfoBean("几室", FilterTabType.FILTER_TYPE_SINGLE_GIRD, filterEntity.getPrice());
+        FilterTabInfo bean1 = new FilterTabInfo("区域", FilterTabType.FILTER_TYPE_AREA, filterEntity.getArea());
+        FilterTabInfo bean2 = new FilterTabInfo("总价", FilterTabType.FILTER_TYPE_PRICE, filterEntity.getPrice());
+        FilterTabInfo bean3 = new FilterTabInfo("户型", FilterTabType.FILTER_TYPE_SINGLE_SELECT, filterEntity.getHouseType());
+        FilterTabInfo bean4 = new FilterTabInfo("筛选", FilterTabType.FILTER_TYPE_MUL_SELECT, filterEntity.getMulSelect());
+        FilterTabInfo bean5 = new FilterTabInfo("几室", FilterTabType.FILTER_TYPE_SINGLE_GIRD, filterEntity.getHouseType());
+        FilterTabInfo bean6 = new FilterTabInfo("几室", FilterTabType.FILTER_TYPE_SINGLE_GIRD, filterEntity.getPrice());
 
 
         ftb_filter.addFilterItem(bean1.getTabName(), bean1.getFilterData(), bean1.getPopupType(), 0);

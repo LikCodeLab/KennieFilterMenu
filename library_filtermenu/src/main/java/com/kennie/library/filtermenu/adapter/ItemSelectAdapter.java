@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.kennie.library.filtermenu.R;
-import com.kennie.library.filtermenu.entity.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterTab;
 import com.kennie.library.filtermenu.util.SpUtils;
 
 import java.util.List;
@@ -24,10 +24,10 @@ import java.util.List;
 public class ItemSelectAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
-    private List<BaseFilterBean> mList;
+    private List<BaseFilterTab> mList;
     private boolean isCanMulSelect;
 
-    public ItemSelectAdapter(Context context, List<BaseFilterBean> list, boolean isCanMulSelect) {
+    public ItemSelectAdapter(Context context, List<BaseFilterTab> list, boolean isCanMulSelect) {
         mContext = context;
         mList = list;
         this.isCanMulSelect = isCanMulSelect;
@@ -44,25 +44,25 @@ public class ItemSelectAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
         try {
-            final BaseFilterBean bean = mList.get(position);
+            final BaseFilterTab bean = mList.get(position);
             ViewHolder viewHolder = (ViewHolder) holder;
             viewHolder.btn_content.setText(bean.getItemName());
 
             // 是否设置“不限”为选中
             boolean isSelectFirst = true;
             for (int i = 0; i < mList.size(); i++) {
-                BaseFilterBean entity = mList.get(i);
-                if (entity.getSelecteStatus() == 1) {
+                BaseFilterTab entity = mList.get(i);
+                if (entity.getSelectStatus() == 1) {
                     isSelectFirst = false;
                     break;
                 }
             }
 
             if (isSelectFirst) {
-                mList.get(0).setSelecteStatus(1);
+                mList.get(0).setSelectStatus(1);
             }
 
-            if (bean.getSelecteStatus() == 0) {
+            if (bean.getSelectStatus() == 0) {
 
                 GradientDrawable unselectDrawable = new GradientDrawable();
                 if (SpUtils.getInstance(mContext).getSolidUnSelectColor() == 0) {
@@ -104,26 +104,26 @@ public class ItemSelectAdapter extends RecyclerView.Adapter {
                         if (position == 0) {
                             // 不限
                             for (int i = 0; i < mList.size(); i++) {
-                               mList.get(i).setSelecteStatus(0);
+                               mList.get(i).setSelectStatus(0);
                             }
                         } else {
-                            mList.get(0).setSelecteStatus(0);
-                            if (mList.get(position).getSelecteStatus() == 0) {
-                                mList.get(position).setSelecteStatus(1);
+                            mList.get(0).setSelectStatus(0);
+                            if (mList.get(position).getSelectStatus() == 0) {
+                                mList.get(position).setSelectStatus(1);
                             } else {
-                                mList.get(position).setSelecteStatus(0);
+                                mList.get(position).setSelectStatus(0);
                             }
                         }
                     } else {
                         for (int i = 0; i < mList.size(); i++) {
                             if (i == position) {
-                                if (mList.get(position).getSelecteStatus() == 0) {
-                                    mList.get(position).setSelecteStatus(1);
+                                if (mList.get(position).getSelectStatus() == 0) {
+                                    mList.get(position).setSelectStatus(1);
                                 } else {
-                                    mList.get(position).setSelecteStatus(0);
+                                    mList.get(position).setSelectStatus(0);
                                 }
                             } else {
-                                mList.get(i).setSelecteStatus(0);
+                                mList.get(i).setSelectStatus(0);
                             }
                         }
                     }

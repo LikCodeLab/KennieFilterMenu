@@ -19,7 +19,7 @@ import androidx.annotation.Nullable;
 import com.kennie.library.filtermenu.config.FilterTabType;
 import com.kennie.library.filtermenu.core.IPopupLoader;
 import com.kennie.library.filtermenu.core.PopupEntityLoaderImp;
-import com.kennie.library.filtermenu.entity.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterTab;
 import com.kennie.library.filtermenu.core.BasePopupWindow;
 import com.kennie.library.filtermenu.entity.FilterResultBean;
 import com.kennie.library.filtermenu.listener.OnAdapterRefreshListener;
@@ -52,7 +52,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
      */
     private ArrayList<BasePopupWindow> mPopupWs = new ArrayList<>();
     private ArrayList<TextView> mTextViewLists = new ArrayList<>();
-    private List<List<BaseFilterBean>> mDataList = new ArrayList<>();
+    private List<List<BaseFilterTab>> mDataList = new ArrayList<>();
     /**
      * 初期进来Tab名称
      */
@@ -177,7 +177,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
      * @param filterType
      * @return
      */
-    public FilterTabView addFilterItem(String tabName, List<BaseFilterBean> data, final int filterType, int popupIndex) {
+    public FilterTabView addFilterItem(String tabName, List<BaseFilterTab> data, final int filterType, int popupIndex) {
         View tabView = inflate(getContext(), R.layout.item_tab_filter, null);
         final TextView tv_tab_name = tabView.findViewById(R.id.tv_tab_name);
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
@@ -256,7 +256,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
 
     private String setFilterTabName(int filterType, List data, String tabFixName) {
         String tabName = "";
-        List<BaseFilterBean> list = (List<BaseFilterBean>) data;
+        List<BaseFilterTab> list = (List<BaseFilterTab>) data;
         if (list != null && list.size() > 0) {
             int size = list.size();
             // 单行只有一个层级的点击
@@ -264,25 +264,25 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
                     || filterType == FilterTabType.FILTER_TYPE_PRICE) {
 
                 for (int i = 0; i < size; i++) {
-                    BaseFilterBean bean = list.get(i);
-                    if (bean.getSelecteStatus() == 1 && bean.getId() != -1) {
+                    BaseFilterTab bean = list.get(i);
+                    if (bean.getSelectStatus() == 1 && bean.getItemId() != -1) {
                         tabName = bean.getItemName();
                         break;
                     }
                 }
                 // Gird型多选/单选
             } else if (filterType == FilterTabType.FILTER_TYPE_SINGLE_GIRD) {
-                List<BaseFilterBean> selectList = new ArrayList<>();
+                List<BaseFilterTab> selectList = new ArrayList<>();
                 for (int i = 0; i < size; i++) {
-                    BaseFilterBean resultBean = list.get(i);
-                    if (resultBean.getSelecteStatus() == 1 && resultBean.getId() != -1) {
+                    BaseFilterTab resultBean = list.get(i);
+                    if (resultBean.getSelectStatus() == 1 && resultBean.getItemId() != -1) {
                         selectList.add(resultBean);
                     }
                 }
 
 
                 for (int i = 0; i < selectList.size(); i++) {
-                    BaseFilterBean bean = selectList.get(i);
+                    BaseFilterTab bean = selectList.get(i);
                     if (i == selectList.size() - 1) {
                         tabName = tabName + bean.getItemName();
                     } else {
@@ -294,12 +294,12 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
             } else if (filterType == FilterTabType.FILTER_TYPE_AREA) {
                 // 先看二级分类有没有选择的
                 for (int i = 0; i < size; i++) {
-                    BaseFilterBean parentBean = list.get(i);
-                    List<BaseFilterBean> childList = parentBean.getChildList();
+                    BaseFilterTab parentBean = list.get(i);
+                    List<BaseFilterTab> childList = parentBean.getChildList();
                     if (childList != null && childList.size() > 0) {
                         for (int j = 0; j < childList.size(); j++) {
-                            BaseFilterBean childBean = childList.get(j);
-                            if (childBean.getSelecteStatus() == 1 && childBean.getId() != -1) {
+                            BaseFilterTab childBean = childList.get(j);
+                            if (childBean.getSelectStatus() == 1 && childBean.getItemId() != -1) {
                                 tabName = childBean.getItemName();
                                 break;
                             }
@@ -311,8 +311,8 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
                 // 再看一级分类有没有选择的
                 if (TextUtils.isEmpty(tabName)) {
                     for (int i = 0; i < size; i++) {
-                        BaseFilterBean parentBean = list.get(i);
-                        if (parentBean.getSelecteStatus() == 1 && (parentBean.getId() != -1 && parentBean.getId() != 0)) {
+                        BaseFilterTab parentBean = list.get(i);
+                        if (parentBean.getSelectStatus() == 1 && (parentBean.getItemId() != -1 && parentBean.getItemId() != 0)) {
                             tabName = parentBean.getItemName();
                             break;
                         }
@@ -323,12 +323,12 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
             } else if (filterType == FilterTabType.FILTER_TYPE_MUL_SELECT) {
                 int count = 0;
                 for (int i = 0; i < size; i++) {
-                    BaseFilterBean parentBean = list.get(i);
-                    List<BaseFilterBean> childList = parentBean.getChildList();
+                    BaseFilterTab parentBean = list.get(i);
+                    List<BaseFilterTab> childList = parentBean.getChildList();
                     if (childList != null && childList.size() > 0) {
                         for (int j = 0; j < childList.size(); j++) {
-                            BaseFilterBean childBean = childList.get(j);
-                            if (childBean.getSelecteStatus() == 1 && childBean.getId() != -1) {
+                            BaseFilterTab childBean = childList.get(j);
+                            if (childBean.getSelectStatus() == 1 && childBean.getItemId() != -1) {
                                 count++;
                             }
                         }
@@ -431,7 +431,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
     }
 
     private void resetSelectData(int currentIndex, int filterType) {
-        List<BaseFilterBean> datas = mDataList.get(currentIndex);
+        List<BaseFilterTab> datas = mDataList.get(currentIndex);
 
         if (FilterTabType.FILTER_TYPE_MUL_SELECT == filterType) {
             FilterResultBean bean = (FilterResultBean) mHasSelected.get(currentIndex);
@@ -459,28 +459,28 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
 
                 for (String key : map.keySet()) {
                     for (int i = 0; i < datas.size(); i++) {
-                        BaseFilterBean data = datas.get(i);
+                        BaseFilterTab data = datas.get(i);
 
                         if (keyList.contains(data.getSortKey())) {
                             if (key.equals(data.getSortKey())) {
                                 List<Integer> ids = map.get(key);
 
-                                List<BaseFilterBean> childList = data.getChildList();
+                                List<BaseFilterTab> childList = data.getChildList();
                                 for (int j = 0; j < childList.size(); j++) {
-                                    BaseFilterBean baseFilterBean = childList.get(j);
+                                    BaseFilterTab baseFilterBean = childList.get(j);
 
-                                    if (!ids.contains(baseFilterBean.getId())) {
-                                        baseFilterBean.setSelecteStatus(0);
+                                    if (!ids.contains(baseFilterBean.getItemId())) {
+                                        baseFilterBean.setSelectStatus(0);
                                     } else {
-                                        baseFilterBean.setSelecteStatus(1);
+                                        baseFilterBean.setSelectStatus(1);
                                     }
                                 }
                             }
                         } else {
-                            List<BaseFilterBean> childList = data.getChildList();
+                            List<BaseFilterTab> childList = data.getChildList();
                             for (int j = 0; j < childList.size(); j++) {
-                                BaseFilterBean baseFilterBean = childList.get(j);
-                                baseFilterBean.setSelecteStatus(0);
+                                BaseFilterTab baseFilterBean = childList.get(j);
+                                baseFilterBean.setSelectStatus(0);
                             }
                         }
                     }
@@ -496,11 +496,11 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
                 }
 
                 for (int i = 0; i < datas.size(); i++) {
-                    BaseFilterBean bean = datas.get(i);
-                    if (!ids.contains(bean.getId())) {
-                        bean.setSelecteStatus(0);
+                    BaseFilterTab bean = datas.get(i);
+                    if (!ids.contains(bean.getItemId())) {
+                        bean.setSelectStatus(0);
                     } else {
-                        bean.setSelecteStatus(1);
+                        bean.setSelectStatus(1);
                     }
                 }
             }
@@ -610,28 +610,28 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
     public void setTabName(int popupIndex, int firstId, String name, int secondId) {
         // 设置区域的名称并且保证显示的时候，对应的名称被选中
         mTextViewLists.get(popupIndex).setText(name);
-        List<BaseFilterBean> list = mDataList.get(popupIndex);
+        List<BaseFilterTab> list = mDataList.get(popupIndex);
         if (list != null && list.size() > 0) {
-            BaseFilterBean selectBean = null;
+            BaseFilterTab selectBean = null;
             for (int i = 0; i < list.size(); i++) {
-                BaseFilterBean bean = list.get(i);
-                if (bean.getId() == firstId) {
-                    bean.setSelecteStatus(1);
+                BaseFilterTab bean = list.get(i);
+                if (bean.getItemId() == firstId) {
+                    bean.setSelectStatus(1);
                     selectBean = bean;
                 } else {
-                    bean.setSelecteStatus(0);
+                    bean.setSelectStatus(0);
                 }
             }
 
             if (selectBean != null && secondId != 0) {
-                List<BaseFilterBean> childList = selectBean.getChildList();
+                List<BaseFilterTab> childList = selectBean.getChildList();
                 if (childList != null && childList.size() > 0) {
                     for (int j = 0; j < childList.size(); j++) {
-                        BaseFilterBean childBean = childList.get(j);
-                        if (childBean.getId() == secondId) {
-                            childBean.setSelecteStatus(1);
+                        BaseFilterTab childBean = childList.get(j);
+                        if (childBean.getItemId() == secondId) {
+                            childBean.setSelectStatus(1);
                         } else {
-                            childBean.setSelecteStatus(0);
+                            childBean.setSelectStatus(0);
                         }
                     }
                 }

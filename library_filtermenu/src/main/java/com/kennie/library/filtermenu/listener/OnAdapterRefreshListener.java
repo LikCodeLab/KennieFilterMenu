@@ -1,9 +1,9 @@
 package com.kennie.library.filtermenu.listener;
 
 
-import com.kennie.library.filtermenu.entity.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterTab;
 
 public interface OnAdapterRefreshListener {
 
-    void onRefresh(BaseFilterBean selectBean);
+    void onRefresh(BaseFilterTab selectBean);
 }

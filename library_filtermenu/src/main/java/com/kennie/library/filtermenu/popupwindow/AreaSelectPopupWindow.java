@@ -16,7 +16,7 @@ import com.kennie.library.filtermenu.FilterTabView;
 import com.kennie.library.filtermenu.R;
 import com.kennie.library.filtermenu.adapter.AreaChildAdapter;
 import com.kennie.library.filtermenu.adapter.AreaParentAdapter;
-import com.kennie.library.filtermenu.entity.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterTab;
 import com.kennie.library.filtermenu.core.BasePopupWindow;
 import com.kennie.library.filtermenu.listener.OnAdapterRefreshListener;
 import com.kennie.library.filtermenu.listener.OnFilterToViewListener;
@@ -36,11 +36,11 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
     /**
      * 一级数据
      */
-    private List<BaseFilterBean> mParentList;
+    private List<BaseFilterTab> mParentList;
     /**
      * 当前点击的一级分类数据
      */
-    private BaseFilterBean mCurrentClickParentBean;
+    private BaseFilterTab mCurrentClickParentBean;
     /**
      * 当前点击的一级Position
      */
@@ -63,7 +63,7 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
                 if (msg.what == 1) {
                     int position = (int) msg.obj;
                     if (position != -1) {
-                        BaseFilterBean clickParentBean = mParentList.get(position);
+                        BaseFilterTab clickParentBean = mParentList.get(position);
                         if (clickParentBean.getChildList() != null && clickParentBean.getChildList().size() > 0) {
                             mChildAdapter.addData(clickParentBean.getChildList());
                         }
@@ -76,8 +76,8 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
         if (mParentList != null && mParentList.size() > 0) {
             int size = mParentList.size();
             for (int i = 0; i < size; i++) {
-                BaseFilterBean bean = mParentList.get(i);
-                if (bean.getSelecteStatus() == 1 && bean.getId() != -1) {
+                BaseFilterTab bean = mParentList.get(i);
+                if (bean.getSelectStatus() == 1 && bean.getItemId() != -1) {
                     mCurrentClickParentBean = bean;
                     mCurrentClickParentPosition = i;
                     break;
@@ -108,7 +108,7 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
                 try {
                     mCurrentClickParentBean = mParentList.get(position);
                     mCurrentClickParentPosition = position;
-                    List<BaseFilterBean> childList = mCurrentClickParentBean.getChildList();
+                    List<BaseFilterTab> childList = mCurrentClickParentBean.getChildList();
                     if (childList != null && childList.size() > 0) {
                         mChildAdapter.addData(childList);
                     } else {
@@ -116,7 +116,7 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
                     }
 
                     // -1 即为点击“不限”
-                    if (mCurrentClickParentBean.getId() == -1) {
+                    if (mCurrentClickParentBean.getItemId() == -1) {
                         FilterResultBean resultBean = new FilterResultBean();
                         resultBean.setPopupType(getFilterType());
                         resultBean.setPopupIndex(getPosition());
@@ -140,13 +140,13 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
                         int size = mParentList.size();
                         for (int i = 0; i < size; i++) {
                             if (i != mCurrentClickParentPosition) {
-                                BaseFilterBean bean = mParentList.get(i);
-                                List<BaseFilterBean> childList = bean.getChildList();
+                                BaseFilterTab bean = mParentList.get(i);
+                                List<BaseFilterTab> childList = bean.getChildList();
                                 if (childList != null && childList.size() > 0) {
                                     int childSize = childList.size();
                                     for (int j = 0; j < childSize; j++) {
-                                        BaseFilterBean childBean = childList.get(j);
-                                        childBean.setSelecteStatus(0);
+                                        BaseFilterTab childBean = childList.get(j);
+                                        childBean.setSelectStatus(0);
                                     }
                                 }
                             }
@@ -154,15 +154,15 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
 
 
                         // 二级数据
-                        List<BaseFilterBean> childList = mCurrentClickParentBean.getChildList();
-                        BaseFilterBean childBean = childList.get(position);
+                        List<BaseFilterTab> childList = mCurrentClickParentBean.getChildList();
+                        BaseFilterTab childBean = childList.get(position);
 
                         FilterResultBean resultBean = new FilterResultBean();
-                        resultBean.setItemId(mCurrentClickParentBean.getId());
+                        resultBean.setItemId(mCurrentClickParentBean.getItemId());
                         resultBean.setPopupType(getFilterType());
-                        resultBean.setChildId(childBean.getId());
+                        resultBean.setChildId(childBean.getItemId());
                         resultBean.setPopupIndex(getPosition());
-                        if (childBean.getId() == -1) {
+                        if (childBean.getItemId() == -1) {
                             resultBean.setName(mCurrentClickParentBean.getItemName());
                         } else {
                             resultBean.setName(childBean.getItemName());
@@ -178,7 +178,7 @@ public class AreaSelectPopupWindow extends BasePopupWindow implements OnAdapterR
     }
 
     @Override
-    public void onRefresh(BaseFilterBean selectBean) {
+    public void onRefresh(BaseFilterTab selectBean) {
         mCurrentClickParentBean = selectBean;
         mParentAdapter.notifyDataSetChanged();
     }

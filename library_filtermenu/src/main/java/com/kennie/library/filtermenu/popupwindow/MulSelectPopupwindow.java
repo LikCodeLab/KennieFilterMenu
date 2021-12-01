@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kennie.library.filtermenu.entity.FilterResultBean;
 import com.kennie.library.filtermenu.R;
 import com.kennie.library.filtermenu.adapter.PopupMulAdapter;
-import com.kennie.library.filtermenu.entity.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterTab;
 import com.kennie.library.filtermenu.core.BasePopupWindow;
 import com.kennie.library.filtermenu.listener.OnFilterToViewListener;
 import com.kennie.library.filtermenu.util.SpUtils;
@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * 多分类筛选的多选样式
  */
-public class MulSelectPopupwindow extends BasePopupWindow implements View.OnClickListener{
+public class MulSelectPopupwindow extends BasePopupWindow implements View.OnClickListener {
 
     private RecyclerView rv_content;
     private Button btn_reset;
@@ -68,7 +68,7 @@ public class MulSelectPopupwindow extends BasePopupWindow implements View.OnClic
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) rv_content.getLayoutParams();
         LinearLayout.LayoutParams bottomParams = (LinearLayout.LayoutParams) ll_bottom.getLayoutParams();
         LinearLayout.LayoutParams bottomParams2 = (LinearLayout.LayoutParams) ll_bottom_2.getLayoutParams();
-        if(SpUtils.getInstance(mContext).getTextStyle() == 1) {
+        if (SpUtils.getInstance(mContext).getTextStyle() == 1) {
             ll_bottom_2.setVisibility(View.VISIBLE);
             ll_bottom.setVisibility(View.GONE);
             v_divide.setVisibility(View.GONE);
@@ -134,17 +134,17 @@ public class MulSelectPopupwindow extends BasePopupWindow implements View.OnClic
     private void doReset() {
         try {
             mSelectList.clear();
-            List<BaseFilterBean> list = getData();
+            List<BaseFilterTab> list = getData();
             int size = list.size();
             for (int i = 0; i < size; i++) {
-                BaseFilterBean parentBean = list.get(i);
-                List<BaseFilterBean> childList = parentBean.getChildList();
+                BaseFilterTab parentBean = list.get(i);
+                List<BaseFilterTab> childList = parentBean.getChildList();
                 if (childList != null && childList.size() > 0) {
                     int childSize = childList.size();
                     for (int j = 0; j < childSize; j++) {
-                        BaseFilterBean childBean = childList.get(j);
-                        if (childBean.getSelecteStatus() == 1) {
-                            childBean.setSelecteStatus(0);
+                        BaseFilterTab childBean = childList.get(j);
+                        if (childBean.getSelectStatus() == 1) {
+                            childBean.setSelectStatus(0);
                         }
                     }
                 }
@@ -156,25 +156,25 @@ public class MulSelectPopupwindow extends BasePopupWindow implements View.OnClic
         }
     }
 
-    private void doConfirm () {
+    private void doConfirm() {
         try {
             FilterResultBean resultBean = new FilterResultBean();
             resultBean.setPopupIndex(getPosition());
             resultBean.setPopupType(getFilterType());
 
             mSelectList.clear();
-            List<BaseFilterBean> list = getData();
+            List<BaseFilterTab> list = getData();
             int size = list.size();
             for (int i = 0; i < size; i++) {
-                BaseFilterBean parentBean = list.get(i);
-                List<BaseFilterBean> childList = parentBean.getChildList();
+                BaseFilterTab parentBean = list.get(i);
+                List<BaseFilterTab> childList = parentBean.getChildList();
                 if (childList != null && childList.size() > 0) {
                     int childSize = childList.size();
                     for (int j = 0; j < childSize; j++) {
-                        BaseFilterBean childBean = childList.get(j);
-                        if (childBean.getSelecteStatus() == 1 && childBean.getId() != -1) {
+                        BaseFilterTab childBean = childList.get(j);
+                        if (childBean.getSelectStatus() == 1 && childBean.getItemId() != -1) {
                             FilterResultBean.MulTypeBean bean = new FilterResultBean.MulTypeBean();
-                            bean.setItemId(childBean.getId());
+                            bean.setItemId(childBean.getItemId());
                             bean.setTypeKey(parentBean.getSortKey());
                             bean.setItemName(childBean.getItemName());
 

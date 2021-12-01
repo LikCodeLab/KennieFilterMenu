@@ -1,7 +1,7 @@
 package com.kennie.library.app.filtertabview;
 
 
-import com.kennie.library.filtermenu.entity.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterTab;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @date 2018/5/15
  * @email samluys@foxmail.com
  */
-public class FilterChildAreasEntity extends BaseFilterBean {
+public class FilterChildAreasEntity extends BaseFilterTab {
 
     /**
      * 街道ID
@@ -56,17 +56,17 @@ public class FilterChildAreasEntity extends BaseFilterBean {
     }
 
     @Override
-    public int getId() {
+    public int getItemId() {
         return street_id;
     }
 
     @Override
-    public int getSelecteStatus() {
+    public int getSelectStatus() {
         return selected;
     }
 
     @Override
-    public void setSelecteStatus(int status) {
+    public void setSelectStatus(int status) {
         this.selected = status;
     }
 

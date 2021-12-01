@@ -1,29 +1,19 @@
 package com.kennie.library.filtermenu.entity;
 
 
-
 import java.util.List;
 
 
-public class FilterInfoBean {
+public class FilterTabInfo<T extends BaseFilterTab> {
 
-    /**
-     * tab名称
-     */
-    private String tabName;
+    private String tabName; // tab名称
 
-    /**
-     * 对应的Popupwindow类型
-     */
-    private int popupType;
+    private int popupType;  // PopupWindowTab类型
 
-    /**
-     * 对应的Popupwindow数据
-     */
-    private List<BaseFilterBean> filterData;
+    private List<T> filterData; // PopupWindow数据
 
 
-    public FilterInfoBean(String tabName, int popupType, List filterData) {
+    public FilterTabInfo(String tabName, int popupType, List<T> filterData) {
         this.tabName = tabName;
         this.popupType = popupType;
         this.filterData = filterData;
@@ -49,7 +39,7 @@ public class FilterInfoBean {
         return filterData;
     }
 
-    public void setFilterData(List filterData) {
+    public void setFilterData(List<T> filterData) {
         this.filterData = filterData;
     }
 }

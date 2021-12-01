@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kennie.library.filtermenu.entity.FilterResultBean;
 import com.kennie.library.filtermenu.R;
 import com.kennie.library.filtermenu.adapter.PopupSingleAdapter;
-import com.kennie.library.filtermenu.entity.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterTab;
 import com.kennie.library.filtermenu.core.BasePopupWindow;
 import com.kennie.library.filtermenu.listener.OnFilterToViewListener;
 import com.kennie.library.filtermenu.util.KeyboardUtils;
@@ -57,13 +57,13 @@ public class PriceSelectPopupWindow extends BasePopupWindow {
     int recyclerHeight;
 
     /**
-     *  手机屏幕高度
+     * 手机屏幕高度
      */
     int mScreenHeight;
 
-    public PriceSelectPopupWindow(Context context, List data, int filterType,int position,
+    public PriceSelectPopupWindow(Context context, List data, int filterType, int position,
                                   OnFilterToViewListener onFilterToViewListener) {
-        super(context, data, filterType, position,onFilterToViewListener);
+        super(context, data, filterType, position, onFilterToViewListener);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class PriceSelectPopupWindow extends BasePopupWindow {
             @Override
             public void onItemClick(int position) {
                 try {
-                    int itemId = getData().get(position).getId();
+                    int itemId = getData().get(position).getItemId();
                     String itemName = getData().get(position).getItemName();
                     FilterResultBean resultBean = new FilterResultBean();
                     resultBean.setPopupType(getFilterType());
@@ -184,13 +184,13 @@ public class PriceSelectPopupWindow extends BasePopupWindow {
                     getOnFilterToViewListener().onFilterToView(resultBean);
 
                     // 重置list信息
-                    List<BaseFilterBean> list = getData();
+                    List<BaseFilterTab> list = getData();
                     for (int i = 0; i < list.size(); i++) {
-                        BaseFilterBean bean = list.get(i);
+                        BaseFilterTab bean = list.get(i);
                         if (i == 0) {
-                            bean.setSelecteStatus(1);
+                            bean.setSelectStatus(1);
                         } else {
-                            bean.setSelecteStatus(0);
+                            bean.setSelectStatus(0);
                         }
                     }
                     adapter.notifyDataSetChanged();
@@ -205,7 +205,7 @@ public class PriceSelectPopupWindow extends BasePopupWindow {
                     int h = mScreenHeight - filterHeight - toolbarHeight - statusBarHeight;
                     update(mAnchor, WindowManager.LayoutParams.MATCH_PARENT, h);
                     dismiss();
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

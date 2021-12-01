@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kennie.library.filtermenu.entity.FilterResultBean;
 import com.kennie.library.filtermenu.R;
 import com.kennie.library.filtermenu.adapter.ItemSelectAdapter;
-import com.kennie.library.filtermenu.entity.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterTab;
 import com.kennie.library.filtermenu.core.BasePopupWindow;
 import com.kennie.library.filtermenu.listener.OnFilterToViewListener;
 import com.kennie.library.filtermenu.util.SpUtils;
@@ -31,7 +31,7 @@ public class GridSelectPopupWindow extends BasePopupWindow {
     private TextView tv_bottom;
     private List<FilterResultBean> mSelectList;
 
-    public GridSelectPopupWindow(Context context, List<BaseFilterBean> data, int filterType, int position, OnFilterToViewListener onFilterToViewListener) {
+    public GridSelectPopupWindow(Context context, List<BaseFilterTab> data, int filterType, int position, OnFilterToViewListener onFilterToViewListener) {
         super(context, data, filterType,position,onFilterToViewListener);
     }
 
@@ -68,12 +68,12 @@ public class GridSelectPopupWindow extends BasePopupWindow {
             public void onClick(View v) {
                 try {
                     mSelectList.clear();
-                    List<BaseFilterBean> list = getData();
+                    List<BaseFilterTab> list = getData();
                     if (list != null && list.size() > 0) {
                         for (int i = 0; i < list.size(); i++) {
-                            BaseFilterBean bean = list.get(i);
-                            if (bean.getSelecteStatus() == 1) {
-                                int itemId = bean.getId();
+                            BaseFilterTab bean = list.get(i);
+                            if (bean.getSelectStatus() == 1) {
+                                int itemId = bean.getItemId();
                                 String itemName = bean.getItemName();
                                 FilterResultBean resultBean = new FilterResultBean();
                                 resultBean.setPopupIndex(getPosition());

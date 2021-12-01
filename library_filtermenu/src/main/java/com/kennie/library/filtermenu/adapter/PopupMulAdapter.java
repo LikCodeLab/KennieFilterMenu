@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.kennie.library.filtermenu.R;
-import com.kennie.library.filtermenu.entity.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterTab;
 import com.kennie.library.filtermenu.util.SpUtils;
 
 import java.util.List;
@@ -24,9 +24,9 @@ public class PopupMulAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
 
-    private List<BaseFilterBean> mList;
+    private List<BaseFilterTab> mList;
 
-    public PopupMulAdapter(Context context, List<BaseFilterBean> list) {
+    public PopupMulAdapter(Context context, List<BaseFilterTab> list) {
         mContext = context;
         mList = list;
     }
@@ -43,7 +43,7 @@ public class PopupMulAdapter extends RecyclerView.Adapter {
 
         ViewHolder viewHolder = (ViewHolder) holder;
 
-        BaseFilterBean bean = mList.get(position);
+        BaseFilterTab bean = mList.get(position);
         if (SpUtils.getInstance(mContext).getTextStyle() == 1) {
             TextPaint textPaint = viewHolder.tv_classify_name.getPaint();
             textPaint.setFakeBoldText(true);

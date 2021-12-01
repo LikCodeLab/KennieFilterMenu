@@ -18,7 +18,7 @@ import android.widget.PopupWindow;
 
 
 import com.kennie.library.filtermenu.R;
-import com.kennie.library.filtermenu.entity.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterTab;
 import com.kennie.library.filtermenu.listener.OnFilterToViewListener;
 import com.kennie.library.filtermenu.util.Utils;
 
@@ -53,7 +53,7 @@ public abstract class BasePopupWindow extends PopupWindow {
     /**
      * 数据集合
      */
-    private List<BaseFilterBean> mData = new ArrayList<>();
+    private List<BaseFilterTab> mData = new ArrayList<>();
     private float sNonCompatDensity;
     private float sNonCompatScaleDensity;
 
@@ -207,11 +207,11 @@ public abstract class BasePopupWindow extends PopupWindow {
         this.filterType = filterType;
     }
 
-    public List<BaseFilterBean> getData() {
+    public List<BaseFilterTab> getData() {
         return mData;
     }
 
-    public void setData(List<BaseFilterBean> data) {
+    public void setData(List<BaseFilterTab> data) {
         this.mData = data;
     }
 
