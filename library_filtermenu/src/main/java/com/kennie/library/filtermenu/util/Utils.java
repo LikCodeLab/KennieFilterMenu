@@ -13,9 +13,6 @@ import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 
-import com.kennie.library.filtermenu.DisplayHelper;
-import com.kennie.library.filtermenu.StatusBarHelper;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;

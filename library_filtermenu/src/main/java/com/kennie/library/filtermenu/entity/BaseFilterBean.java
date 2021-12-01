@@ -1,4 +1,4 @@
-package com.kennie.library.filtermenu.base;
+package com.kennie.library.filtermenu.entity;
 
 import java.util.List;
 

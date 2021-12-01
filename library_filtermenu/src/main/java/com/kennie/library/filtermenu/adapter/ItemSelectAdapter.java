@@ -8,7 +8,6 @@ import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.kennie.library.filtermenu.R;
-import com.kennie.library.filtermenu.base.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterBean;
 import com.kennie.library.filtermenu.util.SpUtils;
 
 import java.util.List;

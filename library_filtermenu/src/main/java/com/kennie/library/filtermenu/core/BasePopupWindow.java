@@ -1,4 +1,4 @@
-package com.kennie.library.filtermenu.base;
+package com.kennie.library.filtermenu.core;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,6 +18,7 @@ import android.widget.PopupWindow;
 
 
 import com.kennie.library.filtermenu.R;
+import com.kennie.library.filtermenu.entity.BaseFilterBean;
 import com.kennie.library.filtermenu.listener.OnFilterToViewListener;
 import com.kennie.library.filtermenu.util.Utils;
 

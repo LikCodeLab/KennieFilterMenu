@@ -1,7 +1,10 @@
-package com.kennie.library.filtermenu;
+package com.kennie.library.filtermenu.config;
 
 
-public class FilterTabConfig {
+/**
+ * 筛选菜单Tab类型
+ */
+public class FilterTabType {
 
     /**
      * 区域对应Popupwindow

@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.kennie.library.filtermenu.R;
-import com.kennie.library.filtermenu.base.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterBean;
 import com.kennie.library.filtermenu.util.SpUtils;
 
 import java.util.List;

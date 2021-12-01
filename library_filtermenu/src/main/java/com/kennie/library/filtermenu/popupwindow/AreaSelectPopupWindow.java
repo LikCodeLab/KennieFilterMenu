@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.kennie.library.filtermenu.FilterResultBean;
+import com.kennie.library.filtermenu.entity.FilterResultBean;
 import com.kennie.library.filtermenu.FilterTabView;
 import com.kennie.library.filtermenu.R;
 import com.kennie.library.filtermenu.adapter.AreaChildAdapter;
 import com.kennie.library.filtermenu.adapter.AreaParentAdapter;
-import com.kennie.library.filtermenu.base.BaseFilterBean;
-import com.kennie.library.filtermenu.base.BasePopupWindow;
+import com.kennie.library.filtermenu.entity.BaseFilterBean;
+import com.kennie.library.filtermenu.core.BasePopupWindow;
 import com.kennie.library.filtermenu.listener.OnAdapterRefreshListener;
 import com.kennie.library.filtermenu.listener.OnFilterToViewListener;
 

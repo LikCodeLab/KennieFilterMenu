@@ -1,9 +1,12 @@
-package com.kennie.library.filtermenu;
+package com.kennie.library.filtermenu.core;
 
 import android.content.Context;
 import android.widget.PopupWindow;
 
 
+import com.kennie.library.filtermenu.FilterTabView;
+import com.kennie.library.filtermenu.config.FilterTabType;
+import com.kennie.library.filtermenu.core.IPopupLoader;
 import com.kennie.library.filtermenu.listener.OnFilterToViewListener;
 import com.kennie.library.filtermenu.popupwindow.AreaSelectPopupWindow;
 import com.kennie.library.filtermenu.popupwindow.GridSelectPopupWindow;
@@ -23,19 +26,19 @@ public class PopupEntityLoaderImp implements IPopupLoader {
         PopupWindow popupWindow = null;
 
         switch (filterType) {
-            case FilterTabConfig.FILTER_TYPE_AREA:
+            case FilterTabType.FILTER_TYPE_AREA:
                 popupWindow = new AreaSelectPopupWindow(context,data,filterType,position, onFilterToViewListener, view);
                 break;
-            case FilterTabConfig.FILTER_TYPE_PRICE:
+            case FilterTabType.FILTER_TYPE_PRICE:
                 popupWindow = new PriceSelectPopupWindow(context, data, filterType,position, onFilterToViewListener);
                 break;
-            case FilterTabConfig.FILTER_TYPE_SINGLE_SELECT:
+            case FilterTabType.FILTER_TYPE_SINGLE_SELECT:
                 popupWindow = new SingleSelectPopupWindow(context,data,filterType,position, onFilterToViewListener);
                 break;
-            case FilterTabConfig.FILTER_TYPE_MUL_SELECT:
+            case FilterTabType.FILTER_TYPE_MUL_SELECT:
                 popupWindow = new MulSelectPopupwindow(context,data,filterType,position, onFilterToViewListener);
                 break;
-            case FilterTabConfig.FILTER_TYPE_SINGLE_GIRD:
+            case FilterTabType.FILTER_TYPE_SINGLE_GIRD:
                 popupWindow = new GridSelectPopupWindow(context,data,filterType,position, onFilterToViewListener);
                 break;
             default:

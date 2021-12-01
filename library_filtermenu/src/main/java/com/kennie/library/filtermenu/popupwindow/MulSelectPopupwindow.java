@@ -6,7 +6,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,11 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.kennie.library.filtermenu.FilterResultBean;
+import com.kennie.library.filtermenu.entity.FilterResultBean;
 import com.kennie.library.filtermenu.R;
 import com.kennie.library.filtermenu.adapter.PopupMulAdapter;
-import com.kennie.library.filtermenu.base.BaseFilterBean;
-import com.kennie.library.filtermenu.base.BasePopupWindow;
+import com.kennie.library.filtermenu.entity.BaseFilterBean;
+import com.kennie.library.filtermenu.core.BasePopupWindow;
 import com.kennie.library.filtermenu.listener.OnFilterToViewListener;
 import com.kennie.library.filtermenu.util.SpUtils;
 import com.kennie.library.filtermenu.util.Utils;

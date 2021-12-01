@@ -3,7 +3,6 @@ package com.kennie.library.filtermenu.adapter;
 import android.content.Context;
 
 import android.text.TextPaint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.kennie.library.filtermenu.R;
-import com.kennie.library.filtermenu.base.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterBean;
 import com.kennie.library.filtermenu.util.SpUtils;
 
 import java.util.List;

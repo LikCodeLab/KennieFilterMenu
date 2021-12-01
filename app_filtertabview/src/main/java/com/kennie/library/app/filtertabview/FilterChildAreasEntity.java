@@ -1,7 +1,7 @@
 package com.kennie.library.app.filtertabview;
 
 
-import com.kennie.library.filtermenu.base.BaseFilterBean;
+import com.kennie.library.filtermenu.entity.BaseFilterBean;
 
 import java.util.List;
 

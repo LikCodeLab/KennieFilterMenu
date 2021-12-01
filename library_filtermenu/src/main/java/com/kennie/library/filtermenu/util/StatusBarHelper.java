@@ -1,4 +1,4 @@
-package com.kennie.library.filtermenu;
+package com.kennie.library.filtermenu.util;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -12,6 +12,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.IntDef;
+
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

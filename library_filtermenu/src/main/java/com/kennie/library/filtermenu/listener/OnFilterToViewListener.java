@@ -1,7 +1,7 @@
 package com.kennie.library.filtermenu.listener;
 
 
-import com.kennie.library.filtermenu.FilterResultBean;
+import com.kennie.library.filtermenu.entity.FilterResultBean;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.kennie.library.filtermenu;
+package com.kennie.library.filtermenu.util;
 
 import android.annotation.TargetApi;
 import android.app.AppOpsManager;

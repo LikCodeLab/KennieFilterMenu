@@ -1,7 +1,6 @@
-package com.kennie.library.filtermenu;
+package com.kennie.library.filtermenu.entity;
 
 
-import com.kennie.library.filtermenu.base.BaseFilterBean;
 
 import java.util.List;
 
