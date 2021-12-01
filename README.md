@@ -1,6 +1,6 @@
 # KennieFilterMenu
 
-<p align="center"><img src="./resources/screenshots/logo.png" width="10%"/></p>
+<p align="center"><img src="./resources/screenshots/logo.png" width="20%"/></p>
 
 <p align="center">
     <strong>下拉筛选菜单</strong>
