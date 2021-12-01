@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -46,7 +48,7 @@ public class ItemSelectAdapter extends RecyclerView.Adapter {
         try {
             final BaseFilterTab bean = mList.get(position);
             ViewHolder viewHolder = (ViewHolder) holder;
-            viewHolder.btn_content.setText(bean.getItemName());
+            viewHolder.mItemNameTv.setText(bean.getItemName());
 
             // 是否设置“不限”为选中
             boolean isSelectFirst = true;
@@ -63,48 +65,28 @@ public class ItemSelectAdapter extends RecyclerView.Adapter {
             }
 
             if (bean.getSelectStatus() == 0) {
-
                 GradientDrawable unselectDrawable = new GradientDrawable();
-                if (SpUtils.getInstance(mContext).getSolidUnSelectColor() == 0) {
-                    unselectDrawable.setStroke(2, SpUtils.getInstance(mContext).getStrokeUnSelectColor());
-                }
-
-                if (SpUtils.getInstance(mContext).getTextStyle() == 1) {
-                    TextPaint textPaint = viewHolder.btn_content.getPaint();
-                    textPaint.setFakeBoldText(false);
-                }
-
-                unselectDrawable.setCornerRadius(SpUtils.getInstance(mContext).getCornerRadius());
-                unselectDrawable.setColor(SpUtils.getInstance(mContext).getSolidUnSelectColor());
-                viewHolder.btn_content.setTextColor(SpUtils.getInstance(mContext).getTextUnSelect());
-                viewHolder.btn_content.setBackgroundDrawable(unselectDrawable);
+                unselectDrawable.setCornerRadius(R.dimen.dp_24);
+                unselectDrawable.setColor(ContextCompat.getColor(mContext, R.color.app_gray1));
+                viewHolder.mItemNameTv.setTextColor(ContextCompat.getColor(mContext, R.color.app_default_text));
+                viewHolder.mItemNameTv.setBackgroundDrawable(unselectDrawable);
             } else {
                 GradientDrawable selectDrawable = new GradientDrawable();
-                if (SpUtils.getInstance(mContext).getSolidSelectColor() == 0) {
-                    selectDrawable.setStroke(2, SpUtils.getInstance(mContext).getStrokeSelectColor());
-                }
-
-                if (SpUtils.getInstance(mContext).getTextStyle() == 1) {
-                    TextPaint textPaint = viewHolder.btn_content.getPaint();
-                    textPaint.setFakeBoldText(true);
-                }
-
-                selectDrawable.setCornerRadius(SpUtils.getInstance(mContext).getCornerRadius());
-                selectDrawable.setColor(SpUtils.getInstance(mContext).getSolidSelectColor());
-                viewHolder.btn_content.setTextColor(SpUtils.getInstance(mContext).getTextSelect());
-                viewHolder.btn_content.setBackgroundDrawable(selectDrawable);
+                selectDrawable.setCornerRadius(R.dimen.dp_24);
+                selectDrawable.setColor(ContextCompat.getColor(mContext, R.color.app_default_green_primary));
+                viewHolder.mItemNameTv.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+                viewHolder.mItemNameTv.setBackgroundDrawable(selectDrawable);
             }
 
-            viewHolder.btn_content.setOnClickListener(new View.OnClickListener() {
+            viewHolder.mItemNameTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
                     if (isCanMulSelect) {
-
                         if (position == 0) {
                             // 不限
                             for (int i = 0; i < mList.size(); i++) {
-                               mList.get(i).setSelectStatus(0);
+                                mList.get(i).setSelectStatus(0);
                             }
                         } else {
                             mList.get(0).setSelectStatus(0);
@@ -142,12 +124,11 @@ public class ItemSelectAdapter extends RecyclerView.Adapter {
 
     private static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView btn_content;
+        AppCompatTextView mItemNameTv;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
-            btn_content = itemView.findViewById(R.id.btn_content);
+            mItemNameTv = itemView.findViewById(R.id.tv_item_name);
 
 
         }

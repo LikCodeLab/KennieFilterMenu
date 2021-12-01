@@ -22,11 +22,12 @@
         android:layout_height="@dimen/tool_bar"
         android:background="@color/white"
         app:btn_corner_radius="24dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
         app:btn_solid_select_color="@color/color_e3ecf6"
         app:btn_solid_unselect_color="@color/color_f5f5f6"
         app:btn_text_select_color="@color/color_222222"
         app:btn_text_unselect_color="@color/color_222222"
-        app:column_num="3"
         app:tab_text_style="1" />
 
     <LinearLayout

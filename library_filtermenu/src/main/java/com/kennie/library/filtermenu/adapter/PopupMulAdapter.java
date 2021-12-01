@@ -51,7 +51,7 @@ public class PopupMulAdapter extends RecyclerView.Adapter {
         viewHolder.tv_classify_name.setText(bean.getSortTitle());
 
         final ItemSelectAdapter adapter = new ItemSelectAdapter(mContext, bean.getChildList(), bean.isCanMulSelect());
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, SpUtils.getInstance(mContext).getColumnNum());
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3);
         viewHolder.rv_select.setLayoutManager(gridLayoutManager);
         viewHolder.rv_select.setAdapter(adapter);
     }

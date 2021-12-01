@@ -41,14 +41,11 @@ public class GridSelectPopupWindow extends BasePopupWindow {
         rv_content = rootView.findViewById(R.id.rv_content);
         tv_bottom = rootView.findViewById(R.id.tv_bottom);
         boolean isCanMulSelect = getData().get(0).isCanMulSelect();
-        mAdapter = new ItemSelectAdapter(getContext(), getData(),true);
+        mAdapter = new ItemSelectAdapter(getContext(), getData(),isCanMulSelect);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),3);
         rv_content.setLayoutManager(gridLayoutManager);
         rv_content.setAdapter(mAdapter);
         mSelectList = new ArrayList<>();
-
-        tv_bottom.setBackgroundColor(SpUtils.getInstance(mContext).getColorMain());
-
         View v_outside = rootView.findViewById(R.id.v_outside);
         v_outside.setOnClickListener(new View.OnClickListener() {
             @Override

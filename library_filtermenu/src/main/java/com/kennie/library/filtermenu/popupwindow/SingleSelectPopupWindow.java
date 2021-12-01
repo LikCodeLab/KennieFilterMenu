@@ -27,7 +27,7 @@ import com.kennie.library.filtermenu.util.Utils;
  */
 public class SingleSelectPopupWindow extends BasePopupWindow {
 
-    private RecyclerView rv_content;
+    private RecyclerView mContentRv;
     private PopupSingleAdapter mAdapter;
 
     public SingleSelectPopupWindow(Context context, List<BaseFilterTab> data, int filterType, int position, OnFilterToViewListener onFilterToViewListener) {
@@ -37,25 +37,22 @@ public class SingleSelectPopupWindow extends BasePopupWindow {
     @Override
     public View initView() {
         View rootView = LayoutInflater.from(getContext()).inflate(R.layout.popup_single_select, null, false);
-        rv_content = rootView.findViewById(R.id.rv_content);
+        mContentRv = rootView.findViewById(R.id.rv_content);
         mAdapter = new PopupSingleAdapter(getContext(), getData());
-        final int maxHeight = Utils.dp2px(getContext(), 273);
+        final int maxHeight = Utils.dp2px(getContext(), R.dimen.dp_270);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext()) {
             @Override
             public void setMeasuredDimension(Rect childrenBounds, int wSpec, int hSpec) {
                 super.setMeasuredDimension(childrenBounds, wSpec, View.MeasureSpec.makeMeasureSpec(maxHeight, AT_MOST));
             }
         };
-        rv_content.setLayoutManager(linearLayoutManager);
-        rv_content.setAdapter(mAdapter);
+        mContentRv.setLayoutManager(linearLayoutManager);
+        mContentRv.setAdapter(mAdapter);
 
         View v_outside = rootView.findViewById(R.id.v_outside);
-        v_outside.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isShowing()) {
-                    dismiss();
-                }
+        v_outside.setOnClickListener(view -> {
+            if (isShowing()) {
+                dismiss();
             }
         });
         return rootView;

@@ -15,7 +15,6 @@
         <attr name="btn_corner_radius" format="dimension"/>
         <attr name="btn_text_select_color" format="color"/>
         <attr name="btn_text_unselect_color" format="color"/>
-        <attr name="column_num" format="integer"/>
     </declare-styleable>
 
 </resources>

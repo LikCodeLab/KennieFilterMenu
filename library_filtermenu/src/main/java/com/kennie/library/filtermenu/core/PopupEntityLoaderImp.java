@@ -8,7 +8,6 @@ import com.kennie.library.filtermenu.FilterTabView;
 import com.kennie.library.filtermenu.config.FilterTabType;
 import com.kennie.library.filtermenu.entity.BaseFilterTab;
 import com.kennie.library.filtermenu.listener.OnFilterToViewListener;
-import com.kennie.library.filtermenu.popupwindow.AreaSelectPopupWindow;
 import com.kennie.library.filtermenu.popupwindow.GridSelectPopupWindow;
 import com.kennie.library.filtermenu.popupwindow.MulSelectPopupwindow;
 import com.kennie.library.filtermenu.popupwindow.PriceSelectPopupWindow;
@@ -34,9 +33,6 @@ public class PopupEntityLoaderImp implements IPopupLoader<BaseFilterTab> {
                 break;
             case FilterTabType.TYPE_SINGLE_GIRD:
                 popupWindow = new GridSelectPopupWindow(context, data, filterType, position, onFilterToViewListener);
-                break;
-            case FilterTabType.FILTER_TYPE_AREA:
-                popupWindow = new AreaSelectPopupWindow(context, data, filterType, position, onFilterToViewListener, view);
                 break;
             case FilterTabType.FILTER_TYPE_PRICE:
                 popupWindow = new PriceSelectPopupWindow(context, data, filterType, position, onFilterToViewListener);

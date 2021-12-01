@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.content.ContextCompat;
 
 import com.kennie.library.filtermenu.config.FilterTabType;
 import com.kennie.library.filtermenu.core.IPopupLoader;
@@ -39,17 +41,12 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
 
 
     private Context mContext;
-    /**
-     * 记录Tab的位置
-     */
-    private int mTabPostion = -1;
-    /**
-     * 当前点击的下标
-     */
-    private int currentIndex = -1;
-    /**
-     * popwindow缓存集合
-     */
+
+    private int mTabPosition = -1; // 记录Tab的位置
+
+    private int currentIndex = -1; // 当前点击的下标
+
+    // PopWindow缓存集合
     private ArrayList<BasePopupWindow> mPopupWs = new ArrayList<>();
     private ArrayList<TextView> mTextViewLists = new ArrayList<>();
     private List<List<BaseFilterTab>> mDataList = new ArrayList<>();
@@ -81,12 +78,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
     private int btnSolidSelect;
     private int btnSolidUnselect;
     private float btnCornerRadius;
-    private int btnTextSelect;
-    private int btnTextUnSelect;
-    /**
-     * 多选item的列数
-     */
-    private int columnNum;
+
     /**
      * FilterTabView和activity的回调
      */
@@ -140,9 +132,6 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
             btnSolidSelect = a.getColor(R.styleable.FilterTabView_btn_solid_select_color, 0);
             btnSolidUnselect = a.getColor(R.styleable.FilterTabView_btn_solid_unselect_color, 0);
             btnCornerRadius = a.getDimension(R.styleable.FilterTabView_btn_corner_radius, mContext.getResources().getDimensionPixelSize(R.dimen.btn_corner_radius));
-            btnTextSelect = a.getColor(R.styleable.FilterTabView_btn_text_select_color, mContext.getResources().getColor(R.color.color_main));
-            btnTextUnSelect = a.getColor(R.styleable.FilterTabView_btn_text_unselect_color, mContext.getResources().getColor(R.color.color_666666));
-            columnNum = a.getInteger(R.styleable.FilterTabView_column_num, 3);
             // 选中字体为粗体
             SpUtils.getInstance(context).putTextStyle(tab_text_style);
             // 主题色
@@ -156,10 +145,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
             // button圆角的大小
             SpUtils.getInstance(context).putCornerRadius(btnCornerRadius);
             // button 字体颜色
-            SpUtils.getInstance(context).putTextSelect(btnTextSelect);
-            SpUtils.getInstance(context).putTextUnSelect(btnTextUnSelect);
 
-            SpUtils.getInstance(context).putColumnNum(columnNum);
             mHasSelected = new SparseArray();
 
         } catch (Exception e) {
@@ -171,18 +157,12 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
         }
     }
 
-    /**
-     * @param tabName
-     * @param data
-     * @param filterType
-     * @return
-     */
+
     public FilterTabView addFilterItem(String tabName, List<BaseFilterTab> data, final int filterType, int popupIndex) {
         View tabView = inflate(getContext(), R.layout.item_tab_filter, null);
-        final TextView tv_tab_name = tabView.findViewById(R.id.tv_tab_name);
+        final AppCompatTextView tv_tab_name = tabView.findViewById(R.id.tv_tab_name);
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
         tabView.setLayoutParams(params);
-
         setArrowDirection(tv_tab_name, false);
 
         if (mPopupLoader == null) {
@@ -197,27 +177,23 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 calculatePosition(motionEvent);
-
                 return false;
             }
         });
 
-        basePopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                try {
-                    int filterType = basePopupWindow.getFilterType();
-                    int position = basePopupWindow.getPosition();
+        basePopupWindow.setOnDismissListener(() -> {
+            try {
+                int filterType1 = basePopupWindow.getFilterType();
+                int position = basePopupWindow.getPosition();
 
-                    resetSelectData(position, filterType);
+                resetSelectData(position, filterType1);
 
-                    setArrowDirection(tv_tab_name, false);
-                    if (onPopupDismissListener != null) {
-                        onPopupDismissListener.onDismiss();
-                    }
-                } catch (Exception e) {
-
+                setArrowDirection(tv_tab_name, false);
+                if (onPopupDismissListener != null) {
+                    onPopupDismissListener.onDismiss();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
@@ -227,16 +203,17 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
         String tabSelectName = setFilterTabName(filterType, data, tabName);
         if (TextUtils.isEmpty(tabSelectName)) {
             tv_tab_name.setText(tabName);
+            tv_tab_name.setTextColor(ContextCompat.getColor(mContext, R.color.app_default_primary_dark));
         } else {
             tv_tab_name.setText(tabSelectName);
+            tv_tab_name.setTextColor(ContextCompat.getColor(mContext, R.color.app_default_green_primary_dark));
         }
-        tabView.setTag(++mTabPostion);
+        tabView.setTag(++mTabPosition);
         tabView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 //当点击时,设置当前选中状态
                 currentIndex = (int) view.getTag();
-
                 //弹出当前页pop,或者回收pop
                 showPopView(currentIndex, filterType);
             }
@@ -384,18 +361,9 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
      * 设置箭头方向
      */
     private void setArrowDirection(TextView tv_tab, boolean isUp) {
-        TextPaint textPaint = tv_tab.getPaint();
         if (isUp) {
-            if (tab_text_style == 1) {
-                textPaint.setFakeBoldText(true);
-            }
-
-            tv_tab.setTextColor(btnTextSelect);
             tv_tab.setCompoundDrawablesWithIntrinsicBounds(0, 0, tab_arrow_select, 0);
-
         } else {
-            textPaint.setFakeBoldText(false);
-            tv_tab.setTextColor(btnTextUnSelect);
             tv_tab.setCompoundDrawablesWithIntrinsicBounds(0, 0, tab_arrow_unselect, 0);
         }
     }
@@ -661,7 +629,7 @@ public class FilterTabView extends LinearLayout implements OnFilterToViewListene
         mTextContents.clear();
         mPopupWs.clear();
         mView.clear();
-        mTabPostion = -1;
+        mTabPosition = -1;
         currentIndex = -1;
         mDataList.clear();
         removeAllViews();

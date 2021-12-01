@@ -148,17 +148,4 @@ public class SpUtils {
     public int getTextUnSelect() {
         return sharedPreferences.getInt("btnTextUnSelect", mContext.getResources().getColor(R.color.color_666666));
     }
-
-    /**
-     * 多选Item的列数
-     * @param value
-     */
-    public void putColumnNum(int value) {
-        editor.putInt("column_num", value);
-        editor.commit();
-    }
-
-    public int getColumnNum() {
-        return sharedPreferences.getInt("column_num", 3);
-    }
 }

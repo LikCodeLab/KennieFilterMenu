@@ -1,26 +1,26 @@
 package com.kennie.library.app.filtertabview;
 
-
+import com.google.gson.annotations.SerializedName;
 import com.kennie.library.filtermenu.entity.BaseFilterTab;
 
 import java.util.List;
 
+
 /**
- * @author luys
- * @describe 筛选多选Entity
- * @date 2018/5/15
- * @email samluys@foxmail.com
+ * 筛选多选Entity
  */
 public class FilterMulSelectEntity extends BaseFilterTab {
 
     /**
      * 分类名称
      */
-    private String sortname;
+    @SerializedName("sortname")
+    private String sortName;
     /**
      * 分类Key
      */
-    private String sortkey;
+    @SerializedName("sortkey")
+    private String sortKey;
     /**
      * 分类数据
      */
@@ -36,20 +36,17 @@ public class FilterMulSelectEntity extends BaseFilterTab {
         this.isCan = isCan;
     }
 
-    public String getSortname() {
-        return sortname;
+    public String getSortName() {
+        return sortName;
     }
 
-    public void setSortname(String sortname) {
-        this.sortname = sortname;
+    public void setSortName(String sortName) {
+        this.sortName = sortName;
     }
 
-    public String getSortkey() {
-        return sortkey;
-    }
 
-    public void setSortkey(String sortkey) {
-        this.sortkey = sortkey;
+    public void setSortKey(String sortKey) {
+        this.sortKey = sortKey;
     }
 
     public List<FilterSelectedEntity> getSortdata() {
@@ -82,7 +79,7 @@ public class FilterMulSelectEntity extends BaseFilterTab {
 
     @Override
     public String getSortTitle() {
-        return sortname;
+        return sortName;
     }
 
     @Override
@@ -92,7 +89,7 @@ public class FilterMulSelectEntity extends BaseFilterTab {
 
     @Override
     public String getSortKey() {
-        return sortkey;
+        return sortKey;
     }
 
     @Override

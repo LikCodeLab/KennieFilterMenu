@@ -1,4 +1,22 @@
 {
+  "date": [
+    {
+      "tid": -1,
+      "name": "不限",
+      "selected": 1,
+      "isMulSelect": 0
+    },
+    {
+      "tid": 100,
+      "name": "近一周",
+      "selected": 0
+    },
+    {
+      "tid": 101,
+      "name": "近一月",
+      "selected": 0
+    }
+  ],
   "area": [
     {
       "area_id": "-1",

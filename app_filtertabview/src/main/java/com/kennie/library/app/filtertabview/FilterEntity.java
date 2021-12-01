@@ -3,37 +3,25 @@ package com.kennie.library.app.filtertabview;
 import java.util.List;
 
 /**
- * @author luys
- * @describe 筛选数据
- * @date 2018/5/15
- * @email samluys@foxmail.com
+ * 筛选数据
  */
 public class FilterEntity {
 
+    private List<FilterSelectedEntity> date; // 日期
 
-    /**
-     * 区域
-     */
-    private List<FilterAreaEntity> area;
-    /**
-     * 总价
-     */
-    private List<FilterSelectedEntity> price;
-    /**
-     * 户型
-     */
-    private List<FilterSelectedEntity> houseType;
-    /**
-     * 筛选
-     */
-    private List<FilterMulSelectEntity> mulSelect;
+    private List<FilterSelectedEntity> price; // 总价
 
-    public List<FilterAreaEntity> getArea() {
-        return area;
+    private List<FilterSelectedEntity> houseType; // 户型
+
+    private List<FilterMulSelectEntity> mulSelect; // 筛选
+
+
+    public List<FilterSelectedEntity> getDate() {
+        return date;
     }
 
-    public void setArea(List<FilterAreaEntity> area) {
-        this.area = area;
+    public void setDate(List<FilterSelectedEntity> date) {
+        this.date = date;
     }
 
     public List<FilterSelectedEntity> getPrice() {

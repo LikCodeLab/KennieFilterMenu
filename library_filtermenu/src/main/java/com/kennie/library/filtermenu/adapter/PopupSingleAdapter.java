@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -41,7 +42,7 @@ public class PopupSingleAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
-        final ViewHolder viewHolder = (ViewHolder)holder;
+        final ViewHolder viewHolder = (ViewHolder) holder;
         BaseFilterTab bean = mList.get(position);
         viewHolder.tv_content.setText(bean.getItemName());
 
@@ -60,32 +61,21 @@ public class PopupSingleAdapter extends RecyclerView.Adapter {
         }
 
         if (bean.getSelectStatus() == 0) {
-            if (SpUtils.getInstance(mContext).getTextStyle() == 1) {
-                TextPaint textPaint = viewHolder.tv_content.getPaint();
-                textPaint.setFakeBoldText(false);
-            }
-            viewHolder.tv_content.setTextColor(SpUtils.getInstance(mContext).getTextUnSelect());
+            viewHolder.tv_content.setTextColor(ContextCompat.getColor(mContext, R.color.app_default_primary_dark));
         } else {
-            if (SpUtils.getInstance(mContext).getTextStyle() == 1) {
-                TextPaint textPaint = viewHolder.tv_content.getPaint();
-                textPaint.setFakeBoldText(true);
-            }
-            viewHolder.tv_content.setTextColor(SpUtils.getInstance(mContext).getTextSelect());
+            viewHolder.tv_content.setTextColor(ContextCompat.getColor(mContext, R.color.app_default_green_primary_dark));
         }
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                for (int i = 0; i < mList.size(); i++) {
-                    if (i == position) {
-                        mList.get(position).setSelectStatus(1);
-                    } else {
-                        mList.get(i).setSelectStatus(0);
-                    }
+        viewHolder.itemView.setOnClickListener(view -> {
+            for (int i = 0; i < mList.size(); i++) {
+                if (i == position) {
+                    mList.get(position).setSelectStatus(1);
+                } else {
+                    mList.get(i).setSelectStatus(0);
                 }
-                notifyDataSetChanged();
-                onItemClickListener.onItemClick(position);
             }
+            notifyDataSetChanged();
+            onItemClickListener.onItemClick(position);
         });
 
     }
@@ -95,14 +85,13 @@ public class PopupSingleAdapter extends RecyclerView.Adapter {
         return mList == null ? 0 : mList.size();
     }
 
-    private static class ViewHolder extends RecyclerView.ViewHolder{
+    private static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tv_content;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
-            tv_content = itemView.findViewById(R.id.tv_content);
+            tv_content = itemView.findViewById(R.id.tv_item_name);
         }
     }
 

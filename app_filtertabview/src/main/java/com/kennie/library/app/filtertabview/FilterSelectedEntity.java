@@ -5,11 +5,9 @@ import com.kennie.library.filtermenu.entity.BaseFilterTab;
 
 import java.util.List;
 
+
 /**
- * @author luys
- * @describe 单条选择Entity
- * @date 2018/5/15
- * @email samluys@foxmail.com
+ * 单条选择Entity
  */
 public class FilterSelectedEntity extends BaseFilterTab {
 
@@ -83,5 +81,21 @@ public class FilterSelectedEntity extends BaseFilterTab {
     @Override
     public String getSortKey() {
         return null;
+    }
+
+
+    private int isMulSelect;
+
+    public int getIsMulSelect() {
+        return isMulSelect;
+    }
+
+    public void setIsMulSelect(int isMulSelect) {
+        this.isMulSelect = isMulSelect;
+    }
+
+    @Override
+    public boolean isCanMulSelect() {
+        return isMulSelect == 1;
     }
 }

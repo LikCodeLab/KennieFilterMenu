@@ -35,12 +35,11 @@ public class MainActivity extends AppCompatActivity implements OnSelectResultLis
         FilterTabView ftb_filter = findViewById(R.id.ftb_filter);
         ftb_filter.setColorMain(getResources().getColor(R.color.color_FF6F00));
         ftb_filter.removeViews();
-        FilterTabInfo bean1 = new FilterTabInfo("区域", FilterTabType.FILTER_TYPE_AREA, filterEntity.getArea());
-        FilterTabInfo bean2 = new FilterTabInfo("总价", FilterTabType.FILTER_TYPE_PRICE, filterEntity.getPrice());
-        FilterTabInfo bean3 = new FilterTabInfo("户型", FilterTabType.TYPE_SINGLE, filterEntity.getHouseType());
-        FilterTabInfo bean4 = new FilterTabInfo("筛选", FilterTabType.TYPE_MUL, filterEntity.getMulSelect());
-        FilterTabInfo bean5 = new FilterTabInfo("几室", FilterTabType.TYPE_SINGLE_GIRD, filterEntity.getHouseType());
-        FilterTabInfo bean6 = new FilterTabInfo("几室", FilterTabType.TYPE_SINGLE_GIRD, filterEntity.getPrice());
+        FilterTabInfo bean1 = new FilterTabInfo("户型", FilterTabType.TYPE_SINGLE, filterEntity.getHouseType());
+        FilterTabInfo bean2 = new FilterTabInfo("日期", FilterTabType.TYPE_SINGLE_GIRD, filterEntity.getDate());
+        FilterTabInfo bean3 = new FilterTabInfo("筛选", FilterTabType.TYPE_MUL, filterEntity.getMulSelect());
+        FilterTabInfo bean4 = new FilterTabInfo("总价", FilterTabType.FILTER_TYPE_PRICE, filterEntity.getPrice());
+        FilterTabInfo bean5 = new FilterTabInfo("几室", FilterTabType.TYPE_SINGLE_GIRD, filterEntity.getPrice());
 
 
         ftb_filter.addFilterItem(bean1.getTabName(), bean1.getFilterData(), bean1.getPopupType(), 0);
@@ -48,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements OnSelectResultLis
         ftb_filter.addFilterItem(bean3.getTabName(), bean3.getFilterData(), bean3.getPopupType(), 2);
         ftb_filter.addFilterItem(bean4.getTabName(), bean4.getFilterData(), bean4.getPopupType(), 3);
         ftb_filter.addFilterItem(bean5.getTabName(), bean5.getFilterData(), bean5.getPopupType(), 4);
-        ftb_filter.addFilterItem(bean6.getTabName(), bean6.getFilterData(), bean6.getPopupType(), 5);
 
 
         final TextView toolbar = findViewById(R.id.toolbar);

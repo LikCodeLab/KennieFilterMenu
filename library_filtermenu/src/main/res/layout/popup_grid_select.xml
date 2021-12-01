@@ -10,26 +10,26 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_content"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:paddingTop="5dp"
+        android:layout_height="@dimen/rv_height"
+        android:background="@color/white"
         android:overScrollMode="never"
-        android:background="@color/white" />
+        android:paddingTop="@dimen/dp_10" />
 
     <TextView
         android:id="@+id/tv_bottom"
         android:layout_width="match_parent"
         android:layout_height="46dp"
+        android:layout_marginTop="@dimen/rv_height"
+        android:background="@color/app_default_green_primary"
+        android:gravity="center"
         android:text="@string/confirm"
         android:textColor="@color/white"
-        android:textSize="17sp"
-        android:gravity="center"
-        android:background="@color/color_main"
-        android:layout_marginTop="270dp"/>
+        android:textSize="@dimen/sp_16" />
 
     <View
         android:id="@+id/v_outside"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tv_bottom"
-        android:background="@color/transparent"/>
+        android:background="@color/transparent" />
 </RelativeLayout>

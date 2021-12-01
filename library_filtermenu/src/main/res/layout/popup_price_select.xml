@@ -11,8 +11,8 @@
         android:id="@+id/rv_content"
         android:layout_width="match_parent"
         android:layout_height="@dimen/rv_height"
-        android:overScrollMode="never"
-        android:background="@color/white" />
+        android:background="@color/white"
+        android:overScrollMode="never" />
 
     <include
         android:id="@+id/bottom"
@@ -26,5 +26,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/bottom"
-        android:background="@color/transparent"/>
+        android:background="@color/transparent" />
 </RelativeLayout>
